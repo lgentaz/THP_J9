@@ -13,18 +13,23 @@ def initiate_hash
 	return $what_rate
 end
 
-def highest_rate(rate)
+def hash_float(rate)
 	rate_doll = rate.transform_values{ |k| k[1..-1]}
 	$rate_float = rate_doll.transform_values{ |k| k.to_f}
-	rate_max = $rate_float.key($rate_float.values.max)
+	return $rate_float
+end
+
+
+def highest_rate(rate)
+	rate_float = hash_float(rate)
+	rate_max = rate_float.key(rate_float.values.max)
 	return rate_max
 #	puts $rate_float.values.max
 end
 
 def lowest_rate(rate)
-	rate_doll = rate.transform_values{ |k| k[1..-1]}
-	$rate_float = rate_doll.transform_values{ |k| k.to_f}
-	rate_min = $rate_float.key($rate_float.values.min)
+	rate_float = hash_float(rate)
+	rate_min = rate_float.key(rate_float.values.min)
 	return rate_min
 #	puts $rate_float.values.min
 end
@@ -37,28 +42,39 @@ def search_coin(rate)
 			coin_base << key
 		end
 	end
-	puts coin_base
-	puts coin_base.length
+#	puts coin_base
+	return coin_base.length
 end
 
-search_coin(initiate_hash)
-
-def low_6000
-
+def low_6000(rate)
+	rate_float = hash_float(rate)
+	low_coin = {}
+	number_low = 0
+	rate_float.each_pair do |key, value|
+		if value < 6000
+			low_coin.store(key,value)
+			number_low += 1
+		end
+	end
+	return low_coin
+#	puts number_low
 end
 
 def high_low
-
+	low = low_6000(initiate_hash)
+	puts low.values.max
+	puts low.key(low.values.max)
 end
 
+high_low
 
 
 def blockchain
 	initiate_hash
-	highest_rate
-	lowest_rate
-	search_coin
-	low_6000
-	high_low
+	highest_rate(initiate_hash)
+	lowest_rate(initiate_hash)
+	search_coin(initiate_hash)
+	low_6000(initiate_hash)
+	high_low(low_6000)
 end
 
