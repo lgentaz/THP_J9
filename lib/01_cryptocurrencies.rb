@@ -24,16 +24,16 @@ def highest_rate(rate)
 	rate_float = hash_float(rate)
 #	rate_max = rate_float.key(rate_float.values.max)
 	rate_max = rate_float.select {|k,v| v == rate_float.values.max}	
-	puts rate_max
-	puts $rate_float.values.max
+	return rate_max
+#	puts $rate_float.values.max
 end
 
 def lowest_rate(rate)
 	rate_float = hash_float(rate)
 #	rate_min = rate_float.key(rate_float.values.min)
 	rate_min = rate_float.select {|k,v| v == rate_float.values.min}	
-	puts rate_min
-	puts $rate_float.values.min
+	return rate_min
+#	puts $rate_float.values.min
 end
 
 def search_coin(rate)
@@ -66,18 +66,23 @@ def high_low
 	low = low_6000(initiate_hash)
 #	puts low.values.max
 	super_low = low.select {|k,v| v == low.values.max}	
-	puts super_low
+	return super_low
 end
-
-high_low
 
 
 def blockchain
-	initiate_hash
-	highest_rate(initiate_hash)
-	lowest_rate(initiate_hash)
-	search_coin(initiate_hash)
-	low_6000(initiate_hash)
-	high_low(low_6000)
+	puts "Le tableau de hashage suivant contient la liste des cryptomonnaies et de leur valeurs en dollar:"
+	puts initiate_hash
+	rate_max = highest_rate(initiate_hash).values
+	name_max = highest_rate(initiate_hash).keys
+	puts "La cryptomonnaie présentant la plus grande valeur, avec #{rate_max[0]} dollars, est #{name_max[0]}."
+	rate_min = lowest_rate(initiate_hash).values
+	name_min = lowest_rate(initiate_hash).keys
+	puts "Les cryptomonnaies présentant les plus petites valeurs, avec #{rate_min[0]} dollars, sont #{name_min[0]} et #{name_min[1]}."
+	puts "Plus de #{search_coin(initiate_hash)} devises contiennent le mot 'coin'."
+	puts "Le tableau suivant contient la liste des cryptomonnaies dont la valeur est inferieure à 6000 dollars."
+	puts low_6000(initiate_hash)
+	puts "La devise la plus chère parmi celles dont le cours est inférieur à 6000 dollars est #{high_low.keys[0]}, avec une valeur de #{high_low.values[0]} dollars."
 end
 
+blockchain
