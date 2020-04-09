@@ -100,5 +100,46 @@ def journalists_list
 	puts "Le journaliste e_penser est la position #{where_epenser} de la liste."
 end
 
-journalists_list
+#journalists_list
 
+def menu
+	puts "Si on parcourait le liste des noms des journalistes sur Twitter."
+	puts "Choisis le numero correspondant à ta question: "
+	puts "Combien y a-t-il de journalistes dans la liste? - Tape 1"
+	puts "Combien d'handle contiennent un numéro ? - Tape 2"
+	puts "Combien d'handle contiennent les 4 lettres du prénom 'Aude' à la suite (sans prendre en compte les majuscules) ? - Tape 3"
+	puts "Combien commencent par une majuscule? - Tape 4"
+	puts "Combien contiennent au moins une majuscule ? - Tape 5"
+	puts "Combien y a-t-il de underscore _ dans tous les pseudos confondus ? - Tape 6"
+	puts "Quelle est la liste dans l'ordre alphabétique. - Tape 7"
+	puts "Quels sont les 50 handles les plus courts de la liste - Tape 8"
+	puts "Quelle est la position dans l'array de la personne @epenser ? - Tape 9"
+	puts "Qui se cache derrière un handle? - Tape moins fort"
+	print "> "
+	question = gets.chomp.to_i
+	if question == 1
+		puts "Il y a #{length_journalists} dans la liste."
+	elsif question == 2
+		puts "#{number_journalists} journalistes ont des chiffres dans leur handle." 
+	elsif question == 3
+		puts "#{aude_who} journalistes contiennent 'aude' dans leur handle."
+	elsif question == 4
+		puts "#{first_upper} journalistes ont une majuscule au début de leur handle."
+	elsif question == 5
+		puts "#{uppercase} journalistes ont un handle contenant une majuscule."
+	elsif question == 6
+		puts "Il y a au total #{underscore} underscore dans la liste des journalistes (certains en ont deux dans leur handle)."
+	elsif question == 7
+		puts "Voici la liste des journalistes dans l'ordre alphabetique :"
+		puts sorting
+	elsif question == 8
+		puts "Les cinquantes handles de journalistes les plus courtes sont :"
+		puts short
+	elsif question == 9
+		puts "Le journaliste 'e_penser' est la position n°#{where_epenser} de la liste."
+	end
+
+end
+
+#journalists_list
+menu

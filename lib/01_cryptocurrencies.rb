@@ -22,16 +22,18 @@ end
 
 def highest_rate(rate)
 	rate_float = hash_float(rate)
-	rate_max = rate_float.key(rate_float.values.max)
-	return rate_max
-#	puts $rate_float.values.max
+#	rate_max = rate_float.key(rate_float.values.max)
+	rate_max = rate_float.select {|k,v| v == rate_float.values.max}	
+	puts rate_max
+	puts $rate_float.values.max
 end
 
 def lowest_rate(rate)
 	rate_float = hash_float(rate)
-	rate_min = rate_float.key(rate_float.values.min)
-	return rate_min
-#	puts $rate_float.values.min
+#	rate_min = rate_float.key(rate_float.values.min)
+	rate_min = rate_float.select {|k,v| v == rate_float.values.min}	
+	puts rate_min
+	puts $rate_float.values.min
 end
 
 def search_coin(rate)
@@ -62,8 +64,9 @@ end
 
 def high_low
 	low = low_6000(initiate_hash)
-	puts low.values.max
-	puts low.key(low.values.max)
+#	puts low.values.max
+	super_low = low.select {|k,v| v == low.values.max}	
+	puts super_low
 end
 
 high_low
