@@ -30,7 +30,15 @@ def lowest_rate(rate)
 end
 
 def search_coin(rate)
-
+	coin_base = []
+	rate.each_key do |key|
+		low_cap = key.downcase
+		if low_cap.match(/coin/)
+			coin_base << key
+		end
+	end
+	puts coin_base
+	puts coin_base.length
 end
 
 search_coin(initiate_hash)
@@ -53,3 +61,4 @@ def blockchain
 	low_6000
 	high_low
 end
+
